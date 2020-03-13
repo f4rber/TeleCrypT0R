@@ -78,6 +78,7 @@ def encrypt(self):
         with open(output_file, 'wb') as f:
             f.write(encrypted)  # Записываем информацию в зашифрованный файл / Write encoded message/file to output file
         remove(input_file)  # Удаляем исходный файл / Removing input file
+        remove("key.key")  # Удаляем файл с ключём / Removing key file
 
     except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
         bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
