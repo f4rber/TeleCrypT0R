@@ -1,4 +1,4 @@
-## Telegram CrypT0R bot to crypt your file remotely (made with python 3.8) | Created by F4RB3R
+## Telegram CrypT0R bot to crypt your files remotely (made with python 3.8) | Created by F4RB3R
 ![Made with Python](https://img.shields.io/badge/Made%20with-Python-3572A5.svg)
 
 ```
