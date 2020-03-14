@@ -118,7 +118,7 @@ def encrypt(self):
                 else:
                     walk(path)
 
-        walk("C:/Users/User/Desktop/Python_Projects/CrypT0R/aa/")
+        walk("Your directory must be here")
         
         
 # -----------------------------------------------------------------------------------------------------------------------
