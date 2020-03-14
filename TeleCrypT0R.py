@@ -7,7 +7,7 @@ output_file = 'ss.encrypted'  # Файл который мы получаем н
 
 key_file = open('key.key', 'rb')  # Открываем файл с ключём для чтения / Open file with key
 key = key_file.read()  # Читаем содержимое файла с ключём / Read content of key file
-key_file.close()  # Зыкрываем файл с ключём для чтения / Close file with key
+key_file.close()  # Зыкрываем файл с ключём / Close file with key
 
 
 bot_token = ""  # Токен бота / Bot token
