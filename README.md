@@ -37,15 +37,21 @@ Bot Commands:
 
 ## How to use?
 ```
-First of all you need to run GenerateKey.py to generate key.key
-Put key.key and private.pem to usb drive, this is necessary so that in the future you can decrypt the files
-In the TeleCrypT0R.py file, insert name of file that be encrypted, bot token and your ID(@userinfobot)
-In function walk insert your directory, remember, all files there will be encrypted
+1) Run GenerateKey.py to generate key.key file
+
+2) Copy the key.key to a USB flash drive, this is necessary so that in the future you can decrypt your files
+
+3) In TeleCrypT0R.py insert the file name for the one you want to encrypt, the bot token and your ID (@userinfobot)
+
+4) In the walk function, insert path to your directory, all files there will be encrypted
 ```
 ## Как использовать?
 ```
-Для начала вам нужно запустить GenerateKey.py чтобы сгенерировать файл key.key
-Скопируйте файл key.key на флешку, это нужно для того, чтобы в дальнейшем вы могли расшифровать файл
-В файле TeleCrypT0R.py вставьте имя файла для зашифровования, токен бота и ваш айди(@userinfobot)
-В функцию walk вставьте свой каталог, запомните, все файлы там будут зашифрованы
+1) Запустите GenerateKey.py, чтобы сгенерировать файл key.key
+
+2) Скопируйте key.key на флешку, это нужно для того, чтобы в дальнейшем вы могли расшифровать файл
+
+3) В TeleCrypT0R.py вставьте имя файла для, который вы хотите зашифровать, токен бота и ваш айди (@userinfobot)
+
+4) В функцию walk вставьте путь к своему каталогу, все файлы там будут зашифрованы
 ```
